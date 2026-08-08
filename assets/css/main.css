@@ -1,0 +1,210 @@
+/* ════════════════════════════════════════════
+   DEPÓSITO AMIZADE — Design System
+   ════════════════════════════════════════════ */
+
+:root {
+  --brand:   #ffcf58;
+  --brand-dim: rgba(255, 207, 88, .15);
+  --green:   #20c55e;
+  --accent:  #021889;
+  --bg-0:    #000000;
+  --bg-1:    #080808;
+  --bg-2:    #0f0f0f;
+  --bg-3:    #141414;
+  --border:  rgba(255,255,255,.07);
+  --border-hover: rgba(255, 207, 88, .30);
+  --text-1:  #ffffff;
+  --text-2:  rgba(255,255,255,.65);
+  --text-3:  rgba(255,255,255,.35);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg-0);
+  color: var(--text-1);
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-1); }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,.12); border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: var(--brand); }
+
+/* ── Reveal animation ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity .55s ease, transform .55s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Navbar ── */
+#navbar {
+  transition: background .3s, border-color .3s, backdrop-filter .3s;
+}
+#navbar.scrolled {
+  background: rgba(0,0,0,.85);
+  border-color: rgba(255,255,255,.12);
+  backdrop-filter: blur(24px) saturate(1.4);
+}
+
+/* ── Hero ── */
+.hero-bg {
+  position: absolute; inset: 0;
+  background-image: url('../img/loja.png');
+  background-size: cover;
+  background-position: center;
+  animation: heroZoom 20s ease-in-out infinite alternate;
+}
+@keyframes heroZoom {
+  from { transform: scale(1); }
+  to   { transform: scale(1.08); }
+}
+
+.hero-particles {
+  opacity: .8;
+  background-image:
+    radial-gradient(circle at 15% 25%, rgba(255,255,255,.15) 0, transparent 4px),
+    radial-gradient(circle at 75% 20%, rgba(255,255,255,.12) 0, transparent 3px),
+    radial-gradient(circle at 60% 70%, rgba(255,255,255,.10) 0, transparent 5px),
+    radial-gradient(circle at 35% 80%, rgba(255,255,255,.08) 0, transparent 3px);
+  animation: particlesFloat 15s linear infinite alternate;
+}
+@keyframes particlesFloat {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-30px); }
+}
+
+.animate-fade-up {
+  animation: fadeUp .9s ease forwards;
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Brand carousel ── */
+.carousel-track {
+  width: max-content;
+  animation: scrollBrands 25s linear infinite;
+}
+.carousel-track:hover { animation-play-state: paused; }
+@keyframes scrollBrands {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* ── Filter pills ── */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 18px;
+  border-radius: 99px;
+  border: 1px solid var(--border);
+  color: var(--text-3);
+  font-size: .8rem;
+  font-weight: 600;
+  letter-spacing: .05em;
+  text-transform: capitalize;
+  cursor: pointer;
+  background: transparent;
+  transition: all .2s;
+  white-space: nowrap;
+}
+.pill:hover {
+  border-color: var(--border-hover);
+  color: var(--brand);
+  background: var(--brand-dim);
+}
+.pill.active {
+  background: var(--brand);
+  border-color: var(--brand);
+  color: #000;
+}
+
+/* ── Search input ── */
+.search-wrap {
+  position: relative;
+}
+.search-wrap svg {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: var(--text-3);
+}
+#search-input {
+  width: 100%;
+  background: var(--bg-3);
+  border: 1px solid var(--border);
+  border-radius: 99px;
+  padding: 10px 16px 10px 42px;
+  color: var(--text-1);
+  font-size: .875rem;
+  outline: none;
+  transition: border-color .2s;
+}
+#search-input:focus {
+  border-color: var(--brand);
+}
+#search-input::placeholder { color: var(--text-3); }
+
+/* ── Product card ── */
+.card {
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  overflow: hidden;
+  transition: transform .3s, border-color .3s, box-shadow .3s;
+}
+.card:hover {
+  transform: translateY(-6px);
+  border-color: var(--border-hover);
+  box-shadow: 0 20px 60px rgba(255, 207, 88, .08);
+}
+.card-img-wrap {
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  background: var(--bg-3);
+  position: relative;
+}
+.card-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 16px;
+  transition: transform .4s ease;
+}
+.card:hover .card-img-wrap img {
+  transform: scale(1.06);
+}
+
+/* ── Cart drawer ── */
+#cart-drawer {
+  transition: transform .35s cubic-bezier(.4,0,.2,1);
+}
+#cart-overlay {
+  transition: opacity .3s;
+}
+
+/* ── Empty state ── */
+.empty-state {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 80px 20px;
+  color: var(--text-3);
+  gap: 16px;
+}
