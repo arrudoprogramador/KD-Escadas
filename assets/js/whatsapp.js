@@ -10,7 +10,7 @@ function gerarLinkWhatsapp() {
   const total = carrinho.reduce((s, i) => s + i.preco * i.qtd, 0);
 
   const mensagem =
-    `Olá! Tenho interesse nos seguintes produtos do Depósito Amizade:\n\n` +
+    `Olá! Tenho interesse nos seguintes serviços:\n\n` +
     `${lista}\n\n` +
     `*Total estimado: R$ ${total.toFixed(2).replace('.', ',')}*\n\n` +
     `Aguardo confirmação de disponibilidade e formas de pagamento. Obrigado!`;
@@ -27,6 +27,6 @@ function sendToWhatsApp() {
 function pedirProduto(id) {
   const prod = produtos.find(p => p.id === id);
   if (!prod) return;
-  const msg = `Olá! Tenho interesse no produto: *${prod.nome}*${prod.conteudo ? ` (${prod.conteudo})` : ''}. Poderia me informar disponibilidade e prazo? Obrigado!`;
+  const msg = `Olá! Tenho interesse no serviço: *${prod.nome}*${prod.conteudo ? ` (${prod.conteudo})` : ''}. Poderia me informar disponibilidade e prazo? Obrigado!`;
   window.open(`https://wa.me/${NUMERO_WA}?text=${encodeURIComponent(msg)}`, '_blank');
 }
